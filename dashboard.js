@@ -1,6 +1,19 @@
 // ============================================
 // Central de Alunos — Dashboard
 // ============================================
+// MODO TESTE: enquanto true, a tela abre sem exigir login e
+// mostra dados fictícios, só pra visualizar o layout. Quando
+// o login e o banco estiverem prontos pra testar de verdade,
+// troque para false.
+const MODO_TESTE = true;
+
+const PARCELAS_FICTICIAS = [
+  { numero_parcela: 1, data_vencimento: "2026-02-10", valor: 450, pagamentos: [{ id: 1 }] },
+  { numero_parcela: 2, data_vencimento: "2026-03-10", valor: 450, pagamentos: [{ id: 2 }] },
+  { numero_parcela: 3, data_vencimento: "2026-04-10", valor: 450, pagamentos: [] },
+  { numero_parcela: 4, data_vencimento: "2026-05-10", valor: 450, pagamentos: [] },
+];
+
 // ATENÇÃO — suposições de schema a confirmar:
 // - `lancamentos` tem uma coluna `contrato_id` ligando à parcela
 //   ao contrato (não foi confirmado no contexto do projeto).
@@ -99,6 +112,12 @@ function renderParcelas(lancamentos) {
 }
 
 async function iniciarDashboard() {
+  if (MODO_TESTE) {
+    document.getElementById("user-name").textContent = "Aluna Teste";
+    renderParcelas(PARCELAS_FICTICIAS);
+    return;
+  }
+
   const sessao = await exigirSessao();
   if (!sessao) return;
 
