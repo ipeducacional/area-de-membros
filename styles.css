@@ -1,0 +1,353 @@
+/* ============================================
+   Central de Alunos — Design Tokens
+   ============================================ */
+:root {
+  /* Cor */
+  --color-primary-dark: #4B215B;
+  --color-primary: #8D2391;
+  --color-primary-soft: #A855A8;
+  --color-bg: #FBF8FC;
+  --color-surface: #FFFFFF;
+  --color-text: #2A1330;
+  --color-text-muted: #7C6B82;
+  --color-border: #E8DEEA;
+  --color-gold: #C9A24B;
+  --color-gold-bg: #FAF3E3;
+  --color-success: #3F8F5F;
+  --color-success-bg: #E8F4EC;
+  --color-pending: #B5762A;
+  --color-pending-bg: #FBF0E2;
+
+  /* Tipografia */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Espaçamento */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --shadow-card: 0 2px 12px rgba(75, 33, 91, 0.08);
+  --shadow-elevated: 0 12px 40px rgba(75, 33, 91, 0.16);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+/* ============================================
+   Login — layout split assimétrico
+   ============================================ */
+.login-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 44% 56%;
+}
+
+@media (max-width: 860px) {
+  .login-shell { grid-template-columns: 1fr; }
+  .login-brand { min-height: 240px; }
+}
+
+.login-brand {
+  position: relative;
+  background: linear-gradient(160deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 48px;
+  color: #fff;
+}
+
+/* Signature: orbe ambiente, glow lento — remete ao "brilho" de skincare */
+.login-brand::before,
+.login-brand::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+}
+
+.login-brand::before {
+  width: 380px;
+  height: 380px;
+  background: #C9A2E0;
+  top: -120px;
+  right: -100px;
+  animation: drift-a 18s ease-in-out infinite alternate;
+}
+
+.login-brand::after {
+  width: 300px;
+  height: 300px;
+  background: #6B2F7A;
+  bottom: -80px;
+  left: -60px;
+  animation: drift-b 22s ease-in-out infinite alternate;
+}
+
+@keyframes drift-a {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-30px, 40px) scale(1.1); }
+}
+@keyframes drift-b {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(20px, -30px) scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-brand::before, .login-brand::after { animation: none; }
+}
+
+.login-brand-content {
+  position: relative;
+  z-index: 1;
+}
+
+.login-eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 16px;
+}
+
+.login-headline {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.15;
+  max-width: 380px;
+}
+
+.login-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.login-form-wrap {
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-form-wrap h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.login-form-wrap p.subtitle {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--color-text);
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 15px;
+  background: var(--color-surface);
+  transition: border-color 0.15s ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(141, 35, 145, 0.12);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-dark);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover { background: var(--color-primary); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.form-error {
+  background: #FDEDED;
+  color: #A32E2E;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+  display: none;
+}
+
+.form-error.visible { display: block; }
+
+/* ============================================
+   Dashboard
+   ============================================ */
+.app-shell { min-height: 100vh; }
+
+.app-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header .brand {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--color-primary-dark);
+}
+
+.app-header .user-name {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.btn-ghost:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+.app-main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: grid;
+  gap: 24px;
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+}
+
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.card .card-sub {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+/* Cashback — placeholder desabilitado */
+.cashback-card {
+  border: 1.5px dashed var(--color-gold);
+  background: var(--color-gold-bg);
+}
+
+.cashback-value {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--color-gold);
+  margin-bottom: 4px;
+}
+
+.cashback-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--color-gold);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-top: 12px;
+}
+
+/* Tabela de parcelas */
+table.lancamentos { width: 100%; border-collapse: collapse; }
+
+table.lancamentos th {
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  padding: 8px 10px;
+  border-bottom: 1.5px solid var(--color-border);
+}
+
+table.lancamentos td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+}
+
+table.lancamentos td.valor {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.status-pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.status-pill.pago { background: var(--color-success-bg); color: var(--color-success); }
+.status-pill.pendente { background: var(--color-pending-bg); color: var(--color-pending); }
+
+.empty-state {
+  text-align: center;
+  padding: 32px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 32px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
