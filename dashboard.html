@@ -27,11 +27,50 @@
         <span class="cashback-badge">Em breve</span>
       </div>
 
-      <div class="card">
-        <h3>Minhas parcelas</h3>
-        <p class="card-sub">Situação de pagamento das suas mensalidades e contratos</p>
-        <div id="parcelas-container" class="loading-state">Carregando...</div>
-      </div>
+      <nav class="tabs" id="tabs-nav">
+        <button class="tab-btn active" data-tab="parcelas">Parcelas</button>
+        <button class="tab-btn" data-tab="contratos">Contratos</button>
+        <button class="tab-btn" data-tab="aulas" id="tab-btn-aulas" hidden>Minhas aulas</button>
+        <button class="tab-btn" data-tab="cursos">Cursos</button>
+      </nav>
+
+      <section class="tab-panel active" data-panel="parcelas">
+        <div class="card">
+          <h3>Minhas parcelas</h3>
+          <p class="card-sub">Situação de pagamento das suas mensalidades e contratos</p>
+          <div id="parcelas-container" class="loading-state">Carregando...</div>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-panel="contratos">
+        <div class="card">
+          <h3>Meus contratos</h3>
+          <p class="card-sub">Curso, Pós-graduação, Online e Workshop</p>
+          <div id="contratos-container" class="loading-state">Carregando...</div>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-panel="aulas">
+        <div class="card">
+          <h3>Aulas que ministrei</h3>
+          <p class="card-sub">Suas aulas como professora</p>
+          <div id="aulas-container" class="loading-state">Carregando...</div>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-panel="cursos">
+        <div class="card">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 4px;">
+            <h3 style="margin-bottom:0;">Cursos</h3>
+            <label class="filter-toggle">
+              <input type="checkbox" id="filtro-meus-cursos" />
+              Meus cursos
+            </label>
+          </div>
+          <p class="card-sub">Cursos disponíveis — marque "Meus cursos" pra ver só os que você já tem acesso</p>
+          <div id="cursos-container" class="loading-state">Carregando...</div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -39,5 +78,6 @@
   <script src="supabase-client.js"></script>
   <script src="auth.js"></script>
   <script src="dashboard.js"></script>
+  <script src="tabs.js"></script>
 </body>
 </html>
